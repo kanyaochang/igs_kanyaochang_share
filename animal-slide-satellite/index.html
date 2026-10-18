@@ -79,9 +79,15 @@ document.getElementById("f").addEventListener("submit", async e => {
     go.disabled = false; go.textContent = "打開";
   }
 });
-// 這台裝置記過（或同一個分頁階段輸入過）就直接打開
+// 這台裝置記過（或同一個分頁階段輸入過）就直接打開。
+// 要等這頁載入完才換頁：記住的金鑰免 PBKDF2、解密很快，載入中呼叫 document.open() 不會清掉密碼畫面，
+// 解出來的內容會接在它後面（2026-10-18 實際踩到）
 const saved = get(KEY);
-if (saved) { go.disabled = true; go.textContent = "解密中…"; open(u8(saved)).catch(() => { forget(); go.disabled = false; go.textContent = "打開"; }); }
+if (saved) {
+  go.disabled = true; go.textContent = "解密中…";
+  const run = () => open(u8(saved)).catch(() => { forget(); go.disabled = false; go.textContent = "打開"; });
+  if (document.readyState === "complete") run(); else addEventListener("load", () => setTimeout(run), { once: true });
+}
 </script>
 </body>
 </html>
