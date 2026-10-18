@@ -1,0 +1,8 @@
+{
+  "salt": "JNitA8gcsgy5nZNnpMQbVQ==",
+  "iter": 600000,
+  "check": {
+    "iv": "1D/ehYak+S2lsIN3",
+    "ct": "LJw8aLg914gKGZRnC4OaTwmW"
+  }
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "src": "_private/index.html",
+    "out": "index.html"
+  },
+  {
+    "src": "_private/animal-slide-satellite/index.html",
+    "out": "animal-slide-satellite/index.html"
+  }
+]
